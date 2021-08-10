@@ -1,0 +1,14 @@
+{
+  "name": "devcontainer",
+  "dockerComposeFile": ["../docker-compose.yaml"],
+  "service": "devcontainer",
+  "workspaceFolder": "/home/vscode/workspace",
+  "shutdownAction": "stopCompose",
+  "extensions": [
+    "ms-azuretools.vscode-docker",
+    "MarkLarah.pre-commit-vscode",
+    "redhat.vscode-yaml",
+    "4ops.packer",
+    "4ops.terraform"
+  ]
+}

@@ -1,0 +1,23 @@
+---
+version: '3'
+vars:
+  # target packer template (defaults to all)
+  TEMPLATE: .
+tasks:
+  fmt:
+    desc: Packer fmt
+    dir: "{{.PACKER_DIR}}"
+    cmds:
+      - packer fmt {{.TEMPLATE}}
+  validate:
+    desc: Packer validate
+    deps: [fmt]
+    dir: "{{.PACKER_DIR}}"
+    cmds:
+      - packer validate {{.TEMPLATE}}
+  build:
+    desc: Packer build
+    deps: [validate]
+    dir: "{{.PACKER_DIR}}"
+    cmds:
+      - packer build {{.TEMPLATE}}

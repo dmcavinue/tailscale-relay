@@ -1,0 +1,48 @@
+---
+version: '3'
+
+env:
+  # sets terraform to run in automation mode
+  TF_IN_AUTOMATION: true
+  # set our terraform workspace to match our 
+  # provided 'environment'.
+  TF_WORKSPACE: "{{.ENVIRONMENT}}"
+  # flag to terraform that we cannot provide 
+  # input.
+  TF_INPUT: 0
+  # set some terraform variables:
+  # a prefix of `TF_VAR` for an env var is 
+  # loaded as a terraform variable. Useful
+  # to get our tailscale authkey in.
+  TF_VAR_environment: "{{.ENVIRONMENT}}"
+  TF_VAR_tailscale_authkey: "{{.TAILSCALE_AUTHKEY}}"
+
+tasks:
+  init:
+    desc: Initializes terraform
+    dir: "{{.TERRAFORM_DIR}}"
+    cmds:
+      - terraform init -upgrade
+    silent: true
+  plan:
+    desc: runs a terraform plan
+    deps: [init]
+    env:
+    dir: "{{.TERRAFORM_DIR}}"
+    cmds:
+      - terraform plan
+  apply:
+    desc: runs a terraform apply
+    deps: [init]
+    env:
+    dir: "{{.TERRAFORM_DIR}}"
+    cmds:
+      - terraform apply
+
+  destroy:
+    desc: runs a terraform destroy
+    deps: [init]
+    env:
+    dir: "{{.TERRAFORM_DIR}}"
+    cmds:
+      - terraform destroy

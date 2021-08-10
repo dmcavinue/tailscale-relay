@@ -1,0 +1,13 @@
+---
+version: "3.4"
+services:
+  devcontainer:
+    image: devcontainer:latest
+    network_mode: host
+    build:
+      context: .devcontainer
+    working_dir: /home/vscode/workspace
+    command: "/bin/sh -c \"while sleep 1000; do :; done\""
+    user: vscode
+    volumes:
+      - ".:/home/vscode/workspace"

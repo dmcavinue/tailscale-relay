@@ -1,0 +1,15 @@
+---
+version: '3'
+
+vars:
+  PROJECT_DIR:
+    sh: "git rev-parse --show-toplevel"
+  TERRAFORM_DIR: "{{.PROJECT_DIR}}/terraform/infrastructure"
+  PACKER_DIR: "{{.PROJECT_DIR}}/packer"
+  STATE_DIR: "{{.TERRAFORM_DIR}}/terraform.tfstate.d/{{.ENVIRONMENT}}"    
+dotenv: [".env"]
+
+includes:
+  packer: .taskfiles/packer.yml
+  ssh: .taskfiles/ssh.yml
+  terraform: .taskfiles/terraform.yml

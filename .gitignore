@@ -1,0 +1,11 @@
+# Editors
+.vscode/
+# Trash
+.DS_Store
+Thumbs.db
+# terraform
+.terraform
+.terraform.lock.hcl
+*.env
+*.tfstate*
+*.auto.tfvars
